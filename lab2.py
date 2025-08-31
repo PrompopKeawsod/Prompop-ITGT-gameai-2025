@@ -17,15 +17,20 @@ class App:
 
         self.ball = Agent(position=Vector2(screen_width//2, screen_height//2), redius=100, color=(255,0,0)) #เรียกและส่งหน้าจอไปยังไฟล์ agent
 
-        
+        self.target = Vector2(0, 0)
 
     def handle_input(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        self.target = Vector2(mouse_x,mouse_y)
+
 
     def update(self, delta_time_ms):
+        self.ball.seek_to(self.target)  
         self.ball.update(delta_time_ms)
+        
 
     def draw(self):
         self.screen.fill("grey")
