@@ -9,8 +9,7 @@ class Agent:
         self.position = position
         self.acc = Vector2(0, 0)
         self.mess = 1.0
-        self.EYE_SIGHT = 100
-        self.STOP_DIST = 5 #ระยะที่บอลต้องใกล้หยุด
+        self.EYE_SIGHT = 50
 
     def seek_to(self, target_pos):
         MAXFORCE = 5
@@ -25,55 +24,17 @@ class Agent:
 
         self.apply_force(steering)
 
-    def arrive_to(self, target_pos):
-        MAXFORCE = 5
-        
-        d = target_pos - self.position   
-
-        if d.length_squared() == 0:
-            return
-        
-        dist = d.length() #การทำ squareroot จะกินระบบมาก ควรเรียกครั้งเดียว 
-        if dist < self.STOP_DIST:
-            desired = Vector2(0,0)
-        elif dist < self.EYE_SIGHT:
-            desired = d.normalize() * (MAXFORCE * (dist/self.EYE_SIGHT)) #มองเป็นพลังงาน ระยะมากยิ่งไว
-        else:
-            desired = d.normalize() * MAXFORCE
-        
-        steering = desired - self.vel
-        if steering.length() > MAXFORCE:
-            steering.scale_to_length(MAXFORCE)
-
-        self.apply_force(steering)
-
     def fee_form(self, target_pos):
-        MAXFORCE = 5
+        MAXFORCE = 10
         d = (target_pos - self.position) * -1
         if d.length_squared() == 0:
             return
         
         dist = d.length()
         if dist > self.EYE_SIGHT:
-            desired = Vector2(0,0)
+            return
         else:
             desired = d.normalize() * (MAXFORCE * ((self.EYE_SIGHT - dist)/self.EYE_SIGHT))
-
-
-        steering = desired - self.vel
-        if steering.length() > MAXFORCE:
-            steering.scale_to_length(MAXFORCE)
-
-        self.apply_force(steering)
-    
-    def patrol(self, target_pos):
-        
-        MAXFORCE = 5
-        d = Vector2(100,200) - self.position
-        if d.length_squared() == 0:
-            return
-        
-        desired = d.normalize() * MAXFORCE
         steering = desired - self.vel
         if steering.length() > MAXFORCE:
             steering.scale_to_length(MAXFORCE)
