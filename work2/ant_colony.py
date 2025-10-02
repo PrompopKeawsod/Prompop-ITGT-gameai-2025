@@ -19,7 +19,7 @@ class App:
         self.ant_colony_pos = Vector2(0,screen_height)
         self.food_pos = Vector2(screen_width-100,100)
 
-        self.agent_num = 6
+        self.agent_num = 5
         self.agents = []
 
         #Way point
