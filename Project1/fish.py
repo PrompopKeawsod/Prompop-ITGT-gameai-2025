@@ -132,7 +132,7 @@ class Agent:
                 continue
 
             dist = (agent.position - self.position).length_squared() #ทำเหมือน length แต่ไม่ใช้ square root ช่วยลดทรัพยากรเครื่อง
-            if 0 < dist < 300*300: #eye sight
+            if 0 < dist < 350*350: #eye sight
                 center_of_mass += agent.position
                 count += 1
 
@@ -173,9 +173,9 @@ class Agent:
         self.acc = Vector2(0, 0)
 
     def draw(self, screen):
-        if self.vel.x > 0.4:       # ถ้าเคลื่อนไปขวาแรงพอ
+        if self.vel.x > 0.7:       # ถ้าเคลื่อนไปขวาแรงพอ
             self.facing_right = True
-        elif self.vel.x < -0.4:    # ถ้าเคลื่อนไปซ้ายแรงพอ
+        elif self.vel.x < -0.7:    # ถ้าเคลื่อนไปซ้ายแรงพอ
             self.facing_right = False
 
         if self.IsHungry:
@@ -191,8 +191,6 @@ class Agent:
 
         rect = fish_img.get_rect(center=(self.position.x, self.position.y))
         screen.blit(fish_img, rect.topleft)
-
-        
 
         '''line(screen,(100,0,0), self.position, self.center_of_mass)
         circle(screen, self.color, self.position, self.circle_redius)'''

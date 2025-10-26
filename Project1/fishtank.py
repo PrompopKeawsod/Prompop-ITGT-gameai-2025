@@ -68,7 +68,6 @@ class App:
                     if len(self.foods) < self.max_foods:
                         self.foods.append(Food(Vector2(mouse_x, mouse_y)))
 
-
     def bound_check(self, agent):
         if agent.position.x <= 30:
             agent.position.x = 30
@@ -83,8 +82,6 @@ class App:
         elif agent.position.y >= screen_height - 95:
             agent.position.y = screen_height - 95
             agent.vel.y *= -0.5
-
-
 
     def update(self, delta_time_s):
         #fish
@@ -202,8 +199,6 @@ class App:
             self.handle_input()
             self.update(delta_time_s)
             self.draw()
-
-            
 
 def main():
     app = App()
